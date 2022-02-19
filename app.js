@@ -16,6 +16,6 @@ app.get("/clock/time", (req, res) => {
     res.send({timeInSeconds: currentDate.getSeconds(), timeInMinutes: currentDate.getMinutes(), timeInHours: currentDate.getHours(), pmAm: amPm});
 });
 
-app.listen(8080, () => {
-    console.log("Server running on port: ", 8080);
+app.listen(process.env.PORT || 8080, () => {
+    console.log("Server running on Heroku or on port: ", 8080);
 });
