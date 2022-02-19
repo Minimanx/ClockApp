@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+
+    <style>
+        .clock {
+            position: absolute;
+            right: 0;
+            left: 0;
+            text-align: center;
+        }
+        .clockImage {
+            width: 45%
+        }
+        @media only screen and (max-width: 850px) {
+            .clockImage {
+                width: 82%;
+            }
+        }
+        body {
+            overflow: hidden;
+            background-color: rgb(112, 183, 187);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="clock" id="clockFace"><img class="clockImage" src="/images/Clock.png" alt="seconds"></div>
+        <div class="clock" id="timeInSeconds"><img class="clockImage" src="/images/Seconds.png" alt="seconds"></div>
+        <div class="clock" id="timeInMinutes"><img class="clockImage" src="/images/Numbers.png" alt="seconds"></div>
+        <div class="clock" id="timeInHours"><img class="clockImage" src="/images/Roman.png" alt="seconds"></div>
+        <div class="clock" id="amPm"></div>
+    </div>
+    <script>
+        function fetchTime(){
+            fetch("/clock/time")
+            .then(response => response.json())
+            .then(result => {
+            const timeSecondsDiv = document.getElementById("timeInSeconds");
+            timeSecondsDiv.style.transform = `rotate(${result.timeInSeconds * 6}deg)`;
+
+            const timeMinutesDiv = document.getElementById("timeInMinutes");
+            timeMinutesDiv.style.transform = `rotate(-${result.timeInMinutes * 6}deg)`;
+
+            const timeHoursDiv = document.getElementById("timeInHours");
+            timeHoursDiv.style.transform = `rotate(-${(result.timeInHours * 30) + (result.timeInMinutes / 2)}deg)`;
+
+            const amPmDiv = document.getElementById("amPm");
+            const amPm = result.pmAm;
+            amPmDiv.innerHTML = `<img class="clockImage" src="/images/${amPm}.png" alt="seconds">`;
+            });
+        }
+        
+        window.addEventListener('load', function () {
+            var fetchInterval = 1000;
+            setInterval(fetchTime, fetchInterval);
+        });
+    </script>
+</body>
+</html>
