@@ -5,11 +5,11 @@ app.use(express.json());
 
 app.use(express.static(__dirname + "/public"));
 
-app.get("/clock", (req, res) => {
+app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/clock.html");
 });
 
-app.get("/clock/time", (req, res) => {
+app.get("/time", (req, res) => {
     const currentDate = new Date();
     const amPm = currentDate.getHours() > 12 ? "PM" : "AM";
     currentDate.toLocaleTimeString('da-DK', { hour: 'numeric', hour12: true});
