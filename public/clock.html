@@ -46,7 +46,7 @@
             timeMinutesDiv.style.transform = `rotate(-${result.timeInMinutes * 6}deg)`;
 
             const timeHoursDiv = document.getElementById("timeInHours");
-            timeHoursDiv.style.transform = `rotate(-${(result.timeInHours * 30) + (result.timeInMinutes / 2)}deg)`;
+            timeHoursDiv.style.transform = `rotate(-${30 + (result.timeInHours * 30) + (result.timeInMinutes / 2)}deg)`;
 
             const amPmDiv = document.getElementById("amPm");
             const amPm = result.pmAm;
