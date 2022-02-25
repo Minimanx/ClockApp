@@ -11,7 +11,8 @@ app.get("/", (req, res) => {
 
 app.get("/time", (req, res) => {
     const currentDate = new Date();
-    const amPm = currentDate.getHours() > 12 ? "PM" : "AM";
+    const hour = currentDate.getHours() - 1 == -1 ? 23 : currentDate.getHours() - 1;
+    const amPm = hour >= 12 ? "PM" : "AM";
     currentDate.toLocaleTimeString('da-DK', { hour: 'numeric', hour12: true});
     res.send({timeInSeconds: currentDate.getSeconds(), timeInMinutes: currentDate.getMinutes(), timeInHours: currentDate.getHours(), pmAm: amPm});
 });
